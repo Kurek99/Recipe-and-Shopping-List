@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RecipeService } from '../recipe.service';
 import { Recipe } from '../recipes.model';
 
@@ -14,7 +15,7 @@ export class RecipeListComponent implements OnInit {
   //   new Recipe('A Test Recipe', 'This is simply a test', 'https://img.buzzfeed.com/video-api-prod/assets/eb44570519264864814264f7f0a5e47a/BFV13909_BakedRatatouille-ThumbTextless1080.jpg?resize=1200:*')
   ];
 
-  constructor(private RecipeService: RecipeService) { }
+  constructor(private RecipeService: RecipeService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(){
     this.recipes = this.RecipeService.getRecipes();
@@ -23,4 +24,7 @@ export class RecipeListComponent implements OnInit {
   // onRecipeSelected(recipe: Recipe){
   //   this.recipeWasSelected.emit(recipe);
   // }
+  onNewRecipe(){
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
 }
